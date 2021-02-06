@@ -40,7 +40,7 @@ abstract class MovieDatabase : RoomDatabase() {
         private fun populateDatabase(db: MovieDatabase?) {
             if (db != null) {
                 val movieDao = db.movieDao()
-                movieDao.insert(Movie("Matrix 1", 5))
+                movieDao.insert(Movie("Matrix 1", "SF movie",5))
             }
         }
     }

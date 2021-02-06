@@ -27,6 +27,8 @@ class MovieAdapter(private val onItemClickListener: (Movie) -> Unit) :
         }
     }
 
+    fun getMovieAt(position: Int): Movie = getItem(position)
+
     inner class MovieHolder(iv: View) : RecyclerView.ViewHolder(iv) {
 
         val movieTitle: TextView = itemView.findViewById(R.id.movie_title_text)

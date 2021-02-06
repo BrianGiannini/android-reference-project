@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Android Reference Project</string>
+    <string name="title">Title</string>
+    <string name="description">description</string>
+    <string name="movie">Movie</string>
+    <string name="save">Save</string>
+    <string name="delete_all_movies">Delete all movies</string>
 </resources>
