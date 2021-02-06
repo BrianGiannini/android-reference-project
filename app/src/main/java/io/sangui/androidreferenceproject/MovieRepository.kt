@@ -5,11 +5,7 @@ import android.app.Application
 class MovieRepository(application: Application) {
 
     private var database = MovieDatabase.getInstance(application)
-    private var movieDao: MovieDao
-
-    init {
-        movieDao = database.movieDao()
-    }
+    private var movieDao: MovieDao = database.movieDao()
 
     fun insert(movie: Movie) {
         movieDao.insert(movie)
