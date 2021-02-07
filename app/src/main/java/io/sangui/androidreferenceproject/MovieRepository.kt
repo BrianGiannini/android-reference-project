@@ -2,6 +2,8 @@ package io.sangui.androidreferenceproject
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class MovieRepository(application: Application) {
 
@@ -9,15 +11,15 @@ class MovieRepository(application: Application) {
     private var movieDao: MovieDao = database.movieDao()
     private var allMovies: LiveData<List<Movie>> = movieDao.getAllMovies()
 
-    fun insert(movie: Movie) {
+    suspend fun insert(movie: Movie) = withContext(Dispatchers.IO) {
         movieDao.insert(movie)
     }
 
-    fun update(note: Movie) {
+    suspend fun update(note: Movie) = withContext(Dispatchers.IO) {
         movieDao.update(note)
     }
 
-    fun delete(movie: Movie) {
+    suspend fun delete(movie: Movie) = withContext(Dispatchers.IO) {
         movieDao.delete(movie)
     }
 
