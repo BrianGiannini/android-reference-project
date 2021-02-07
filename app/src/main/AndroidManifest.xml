@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddEditMovieActivity"
+            android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".MainActivity"/>
     </application>
 
