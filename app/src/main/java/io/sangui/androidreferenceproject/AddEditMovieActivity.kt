@@ -12,7 +12,7 @@ const val EXTRA_TITLE = "EXTRA_TITLE"
 const val EXTRA_DESCRIPTION = "EXTRA_DESCRIPTION"
 const val EXTRA_NOTE = "EXTRA_NOTE"
 
-class AddEditMovieActivity : AppCompatActivity(){
+class AddEditMovieActivity : AppCompatActivity() {
 
     private lateinit var mode: Mode
     private var noteId: Int = -1
@@ -30,6 +30,20 @@ class AddEditMovieActivity : AppCompatActivity(){
 
         binding.buttonSaveEditNote.setOnClickListener {
             saveMovie()
+        }
+
+        noteId = intent.getIntExtra(EXTRA_ID, -1)
+        mode = if (noteId == -1) Mode.EditMovie
+        else Mode.EditMovie
+
+        when (mode) {
+            Mode.AddMovie -> title = "Add Movie"
+            Mode.EditMovie -> {
+                title = "Edit Movie"
+                binding.etTitle.setText(intent.getStringExtra(EXTRA_TITLE))
+                binding.etDesc.setText(intent.getStringExtra(EXTRA_DESCRIPTION))
+                binding.numberPickerPriority.value = intent.getIntExtra(EXTRA_NOTE, -1)
+            }
         }
     }
 
