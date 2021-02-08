@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import io.sangui.androidreferenceproject.R
 import io.sangui.androidreferenceproject.databinding.AddEditMovieFragmentBinding
 
 const val EXTRA_ID = "EXTRA_ID"
@@ -17,7 +18,7 @@ const val EXTRA_TITLE = "EXTRA_TITLE"
 const val EXTRA_DESCRIPTION = "EXTRA_DESCRIPTION"
 const val EXTRA_NOTE = "EXTRA_NOTE"
 
-class AddEditMovieFragment : Fragment() {
+class AddEditMovieFragment : Fragment(R.layout.add_edit_movie_fragment) {
 
     private lateinit var mode: Mode
     private var movieId: Int = -1

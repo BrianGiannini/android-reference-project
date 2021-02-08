@@ -22,7 +22,7 @@ import io.sangui.androidreferenceproject.databinding.MoviesListFragmentBinding
 const val ADD_MOVIE_REQUEST = 1
 const val EDIT_MOVIE_REQUEST = 2
 
-class MoviesListFragment : Fragment() {
+class MoviesListFragment : Fragment(R.layout.movies_list_fragment) {
 
     private lateinit var vm: MovieViewModel
     private lateinit var binding: MoviesListFragmentBinding
@@ -54,9 +54,8 @@ class MoviesListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonAddMovie.setOnClickListener {
-//            val flowStepNumberArg = 1
-//            val action = MoviesListFragmentDirection.nextAction(flowStepNumberArg)
-//            findNavController().navigate(action)
+            val action = MoviesListFragmentDirections.actionMoviesListFragmentToAddEditMovieFragment()
+            findNavController().navigate(action)
         }
     }
 
