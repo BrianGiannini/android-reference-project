@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.sangui.androidreferenceproject.databinding.ActivityMainBinding
 
-const val ADD_NOTE_REQUEST = 1
-const val EDIT_NOTE_REQUEST = 2
+const val ADD_MOVIE_REQUEST = 1
+const val EDIT_MOVIE_REQUEST = 2
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_TITLE, clickedMovie.title)
             intent.putExtra(EXTRA_DESCRIPTION, clickedMovie.description)
             intent.putExtra(EXTRA_NOTE, clickedMovie.note)
-            startActivityForResult(intent, EDIT_NOTE_REQUEST)
+            startActivityForResult(intent, EDIT_MOVIE_REQUEST)
         }
         binding.recyclerView.adapter = adapter
     }
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     private fun setUpListeners() {
         binding.buttonAddMovie.setOnClickListener {
             val intent = Intent(this, AddEditMovieActivity::class.java)
-            startActivityForResult(intent, ADD_NOTE_REQUEST)
+            startActivityForResult(intent, ADD_MOVIE_REQUEST)
         }
 
         // swipe listener
@@ -67,8 +67,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val note = adapter.getMovieAt(viewHolder.adapterPosition)
-                vm.delete(note)
+                val movie = adapter.getMovieAt(viewHolder.adapterPosition)
+                vm.delete(movie)
             }
 
         }).attachToRecyclerView(binding.recyclerView)
@@ -82,24 +82,24 @@ class MainActivity : AppCompatActivity() {
             val description = data.getStringExtra(EXTRA_DESCRIPTION)
             val priority = data.getIntExtra(EXTRA_NOTE, -1)
 
-            if (requestCode == ADD_NOTE_REQUEST && resultCode == Activity.RESULT_OK) {
+            if (requestCode == ADD_MOVIE_REQUEST && resultCode == Activity.RESULT_OK) {
                 if (description != null && title != null) {
                     vm.insert(Movie(title, description, priority))
-                    Toast.makeText(this, "Note inserted!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Movie inserted!", Toast.LENGTH_SHORT).show()
                 }
-            } else if (requestCode == EDIT_NOTE_REQUEST && resultCode == Activity.RESULT_OK) {
+            } else if (requestCode == EDIT_MOVIE_REQUEST && resultCode == Activity.RESULT_OK) {
                 val id = data.getIntExtra(EXTRA_ID, -1)
                 if (id == -1) {
-                    Toast.makeText(this, "Note couldn't be updated!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Movie couldn't be updated!", Toast.LENGTH_SHORT).show()
                     return
                 }
 
-                if (description != null && title != null) {
+                if (title != null) {
                     vm.update(Movie(title, description, priority, id))
-                    Toast.makeText(this, "Note updated!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Movie updated!", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Note not saved!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Movie not saved!", Toast.LENGTH_SHORT).show()
             }
         }
     }

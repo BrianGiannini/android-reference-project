@@ -14,8 +14,8 @@
         android:hint="@string/title"
         android:importantForAutofill="no"
         android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/tv_movie"
+        app:layout_constraintTop_toBottomOf="@+id/tv_movie" />
 
     <EditText
         android:id="@+id/et_desc"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_title" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_movie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/movie"
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_desc" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_save_edit_note"
+        android:id="@+id/button_save_edit_movie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_save"

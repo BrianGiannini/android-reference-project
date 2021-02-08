@@ -27,9 +27,9 @@ class MovieViewModel(app: Application) : AndroidViewModel(app) {
         return allMovies
     }
 
-    fun update(note: Movie) {
+    fun update(movie: Movie) {
         viewModelScope.launch {
-            repository.update(note)
+            repository.update(movie)
         }
     }
 }

@@ -15,8 +15,8 @@ class MovieRepository(application: Application) {
         movieDao.insert(movie)
     }
 
-    suspend fun update(note: Movie) = withContext(Dispatchers.IO) {
-        movieDao.update(note)
+    suspend fun update(movie: Movie) = withContext(Dispatchers.IO) {
+        movieDao.update(movie)
     }
 
     suspend fun delete(movie: Movie) = withContext(Dispatchers.IO) {

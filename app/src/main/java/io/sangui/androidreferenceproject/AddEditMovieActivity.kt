@@ -15,7 +15,7 @@ const val EXTRA_NOTE = "EXTRA_NOTE"
 class AddEditMovieActivity : AppCompatActivity() {
 
     private lateinit var mode: Mode
-    private var noteId: Int = -1
+    private var movieId: Int = -1
 
     private lateinit var binding: ActivityAddEditMovieBinding
 
@@ -28,12 +28,12 @@ class AddEditMovieActivity : AppCompatActivity() {
         binding.numberPickerPriority.minValue = 1
         binding.numberPickerPriority.maxValue = 10
 
-        binding.buttonSaveEditNote.setOnClickListener {
+        binding.buttonSaveEditMovie.setOnClickListener {
             saveMovie()
         }
 
-        noteId = intent.getIntExtra(EXTRA_ID, -1)
-        mode = if (noteId == -1) Mode.EditMovie
+        movieId = intent.getIntExtra(EXTRA_ID, -1)
+        mode = if (movieId == -1) Mode.EditMovie
         else Mode.EditMovie
 
         when (mode) {
@@ -52,15 +52,15 @@ class AddEditMovieActivity : AppCompatActivity() {
         val desc = binding.etDesc.text.toString()
         val priority = binding.numberPickerPriority.value
 
-        if (title.isEmpty() || desc.isEmpty()) {
+        if (title.isEmpty()) {
             Toast.makeText(this, "please insert title and description", Toast.LENGTH_SHORT).show()
             return
         }
 
         val data = Intent()
-        // only if note ID was provided i.e. we are editing
-        if (noteId != -1)
-            data.putExtra(EXTRA_ID, noteId)
+
+        if (movieId != -1)
+            data.putExtra(EXTRA_ID, movieId)
         data.putExtra(EXTRA_TITLE, title)
         data.putExtra(EXTRA_DESCRIPTION, desc)
         data.putExtra(EXTRA_NOTE, priority)

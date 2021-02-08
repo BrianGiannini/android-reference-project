@@ -10,7 +10,7 @@ interface MovieDao {
     fun insert(movie: Movie)
 
     @Update
-    fun update(note: Movie)
+    fun update(movie: Movie)
 
     @Delete
     fun delete(movie: Movie)
