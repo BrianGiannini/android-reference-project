@@ -36,9 +36,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.setHasFixedSize(true)
-
         adapter = MovieAdapter { clickedMovie ->
             val intent = Intent(this, AddEditMovieActivity::class.java)
             intent.putExtra(EXTRA_ID, clickedMovie.id)
@@ -47,7 +44,12 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_NOTE, clickedMovie.note)
             startActivityForResult(intent, EDIT_MOVIE_REQUEST)
         }
-        binding.recyclerView.adapter = adapter
+
+        with(binding) {
+            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+            recyclerView.setHasFixedSize(true)
+            recyclerView.adapter = adapter
+        }
     }
 
     private fun setUpListeners() {

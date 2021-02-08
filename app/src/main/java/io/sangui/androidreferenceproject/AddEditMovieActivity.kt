@@ -23,13 +23,14 @@ class AddEditMovieActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityAddEditMovieBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        binding.numberPickerPriority.minValue = 1
-        binding.numberPickerPriority.maxValue = 10
-
-        binding.buttonSaveEditMovie.setOnClickListener {
-            saveMovie()
+        with(binding) {
+            setContentView(this.root)
+            numberPickerPriority.minValue = 1
+            numberPickerPriority.maxValue = 10
+            buttonSaveEditMovie.setOnClickListener {
+                saveMovie()
+            }
         }
 
         movieId = intent.getIntExtra(EXTRA_ID, -1)
@@ -40,9 +41,11 @@ class AddEditMovieActivity : AppCompatActivity() {
             Mode.AddMovie -> title = "Add Movie"
             Mode.EditMovie -> {
                 title = "Edit Movie"
-                binding.etTitle.setText(intent.getStringExtra(EXTRA_TITLE))
-                binding.etDesc.setText(intent.getStringExtra(EXTRA_DESCRIPTION))
-                binding.numberPickerPriority.value = intent.getIntExtra(EXTRA_NOTE, -1)
+                with(binding) {
+                    etTitle.setText(intent.getStringExtra(EXTRA_TITLE))
+                    etDesc.setText(intent.getStringExtra(EXTRA_DESCRIPTION))
+                    numberPickerPriority.value = intent.getIntExtra(EXTRA_NOTE, -1)
+                }
             }
         }
     }
