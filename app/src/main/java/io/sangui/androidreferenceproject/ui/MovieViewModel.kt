@@ -1,9 +1,11 @@
-package io.sangui.androidreferenceproject
+package io.sangui.androidreferenceproject.ui
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import io.sangui.androidreferenceproject.Movie
+import io.sangui.androidreferenceproject.MovieRepository
 import kotlinx.coroutines.launch
 
 class MovieViewModel(app: Application) : AndroidViewModel(app) {
