@@ -9,7 +9,6 @@ class MovieRepository(application: Application) {
 
     private var database = MovieDatabase.getInstance(application)
     private var movieDao: MovieDao = database.movieDao()
-    private var allMovies: LiveData<List<Movie>> = movieDao.getAllMovies()
 
     suspend fun insert(movie: Movie) = withContext(Dispatchers.IO) {
         movieDao.insert(movie)
@@ -24,6 +23,6 @@ class MovieRepository(application: Application) {
     }
 
     fun getAllMovies(): LiveData<List<Movie>> {
-        return allMovies
+        return movieDao.getAllMovies()
     }
 }

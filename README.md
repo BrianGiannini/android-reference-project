@@ -5,3 +5,6 @@ TO DO :
 - notification
 - Workmanager
 - SharedPref
+- Paging 1
+- Retrofit with online API
+- Koin
