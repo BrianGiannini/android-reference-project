@@ -11,7 +11,20 @@
         tools:layout="@layout/movies_list_fragment" >
         <action
             android:id="@+id/action_moviesListFragment_to_addEditMovieFragment"
-            app:destination="@id/add_edit_movie_fragment" />
+            app:destination="@id/add_edit_movie_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="note"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/add_edit_movie_fragment"
@@ -21,5 +34,14 @@
         <action
             android:id="@+id/action_addEditMovieFragment_to_moviesListFragment"
             app:destination="@id/movies_list_fragment" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="note"
+            app:argType="integer" />
     </fragment>
 </navigation>
