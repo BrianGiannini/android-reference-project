@@ -19,7 +19,6 @@ import io.sangui.androidreferenceproject.databinding.MoviesListFragmentBinding
 
 class MoviesListFragment : Fragment(R.layout.movies_list_fragment) {
 
-    private val args: MoviesListFragmentArgs by navArgs()
     private lateinit var vm: MovieViewModel
     private lateinit var binding: MoviesListFragmentBinding
     private lateinit var adapter: MovieAdapter
@@ -40,22 +39,17 @@ class MoviesListFragment : Fragment(R.layout.movies_list_fragment) {
             adapter.submitList(it)
         })
 
-
-        vm.insert(Movie(args.title, args.description, args.note))
-        Toast.makeText(context, "Movie inserted!", Toast.LENGTH_SHORT).show()
-        vm.update(Movie(args.title, args.description, args.note))
-        Toast.makeText(context, "Movie updated!", Toast.LENGTH_SHORT).show()
-
-
+//            vm.insert(Movie(args.title, args.description, args.note))
+//            Toast.makeText(context, "Movie inserted!", Toast.LENGTH_SHORT).show()
+//        vm.update(Movie(args.title, args.description, args.note))
+//        Toast.makeText(context, "Movie updated!", Toast.LENGTH_SHORT).show()
 
         return view
     }
 
     private fun setUpRecyclerView() {
         adapter = MovieAdapter { clickedMovie ->
-            val description = clickedMovie.description ?: ""
-            val action = MoviesListFragmentDirections.actionMoviesListFragmentToAddEditMovieFragment(clickedMovie.title, description, clickedMovie.note)
-            findNavController().navigate(action)
+            MoveToNextScreen(clickedMovie)
         }
 
         with(binding) {
@@ -66,6 +60,10 @@ class MoviesListFragment : Fragment(R.layout.movies_list_fragment) {
     }
 
     private fun setUpListeners() {
+        binding.buttonAddMovie.setOnClickListener {
+            val action = MoviesListFragmentDirections.actionMoviesListFragmentToAddEditMovieFragment("", "", 5)
+            findNavController().navigate(action)
+        }
 
         // swipe listener
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
@@ -85,40 +83,14 @@ class MoviesListFragment : Fragment(R.layout.movies_list_fragment) {
         }).attachToRecyclerView(binding.recyclerView)
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        if (data != null) {
-//            val title = data.getStringExtra(EXTRA_TITLE)
-//            val description = data.getStringExtra(EXTRA_DESCRIPTION)
-//            val priority = data.getIntExtra(EXTRA_NOTE, -1)
-//
-//            if (requestCode == ADD_MOVIE_REQUEST && resultCode == Activity.RESULT_OK) {
-//                if (description != null && title != null) {
-//                    vm.insert(Movie(title, description, priority))
-//                    Toast.makeText(this, "Movie inserted!", Toast.LENGTH_SHORT).show()
-//                }
-//            } else if (requestCode == EDIT_MOVIE_REQUEST && resultCode == Activity.RESULT_OK) {
-//                val id = data.getIntExtra(EXTRA_ID, -1)
-//                if (id == -1) {
-//                    Toast.makeText(this, "Movie couldn't be updated!", Toast.LENGTH_SHORT).show()
-//                    return
-//                }
-//
-//                if (title != null) {
-//                    vm.update(Movie(title, description, priority, id))
-//                    Toast.makeText(this, "Movie updated!", Toast.LENGTH_SHORT).show()
-//                }
-//            } else {
-//                Toast.makeText(this, "Movie not saved!", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
-
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        viewModel = ViewModelProvider(this).get(MoviesListViewModel::class.java)
-//        // TODO: Use the ViewModel
-//    }
+    private fun MoveToNextScreen(movie: Movie) {
+        val action =
+            MoviesListFragmentDirections.actionMoviesListFragmentToAddEditMovieFragment(
+                movie.title,
+                movie.description ?: "",
+                movie.note
+            )
+        findNavController().navigate(action)
+    }
 
 }
