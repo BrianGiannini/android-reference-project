@@ -50,11 +50,16 @@ class AddEditMovieFragment : Fragment(R.layout.add_edit_movie_fragment) {
         val note = binding.numberPickerPriority.value
 
         if (title.isEmpty()) {
-            Toast.makeText(context, "please insert title and description", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Please insert a title", Toast.LENGTH_SHORT).show()
         } else {
-            vm.insert(Movie(title, description, note))
-            Toast.makeText(context, "Movie inserted!", Toast.LENGTH_SHORT).show()
-            val action = AddEditMovieFragmentDirections.actionAddEditMovieFragmentToMoviesListFragment("", "", 5)
+            if (args.id == -1) {
+                vm.insert(Movie(title, description, note))
+                Toast.makeText(context, "Movie inserted!", Toast.LENGTH_SHORT).show()
+            } else {
+                vm.update(Movie(title, description, note, args.id))
+                Toast.makeText(context, "Movie Updated!", Toast.LENGTH_SHORT).show()
+            }
+            val action = AddEditMovieFragmentDirections.actionAddEditMovieFragmentToMoviesListFragment()
             findNavController().navigate(action)
         }
     }

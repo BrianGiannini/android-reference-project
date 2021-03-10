@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -39,17 +40,12 @@ class MoviesListFragment : Fragment(R.layout.movies_list_fragment) {
             adapter.submitList(it)
         })
 
-//            vm.insert(Movie(args.title, args.description, args.note))
-//            Toast.makeText(context, "Movie inserted!", Toast.LENGTH_SHORT).show()
-//        vm.update(Movie(args.title, args.description, args.note))
-//        Toast.makeText(context, "Movie updated!", Toast.LENGTH_SHORT).show()
-
         return view
     }
 
     private fun setUpRecyclerView() {
         adapter = MovieAdapter { clickedMovie ->
-            MoveToNextScreen(clickedMovie)
+            moveToNextScreen(clickedMovie)
         }
 
         with(binding) {
@@ -61,7 +57,7 @@ class MoviesListFragment : Fragment(R.layout.movies_list_fragment) {
 
     private fun setUpListeners() {
         binding.buttonAddMovie.setOnClickListener {
-            val action = MoviesListFragmentDirections.actionMoviesListFragmentToAddEditMovieFragment("", "", 5)
+            val action = MoviesListFragmentDirections.actionMoviesListFragmentToAddEditMovieFragment("", "", 5,)
             findNavController().navigate(action)
         }
 
@@ -83,12 +79,13 @@ class MoviesListFragment : Fragment(R.layout.movies_list_fragment) {
         }).attachToRecyclerView(binding.recyclerView)
     }
 
-    private fun MoveToNextScreen(movie: Movie) {
+    private fun moveToNextScreen(movie: Movie) {
         val action =
             MoviesListFragmentDirections.actionMoviesListFragmentToAddEditMovieFragment(
                 movie.title,
                 movie.description ?: "",
-                movie.note
+                movie.note,
+                movie.id ?: -1
             )
         findNavController().navigate(action)
     }
